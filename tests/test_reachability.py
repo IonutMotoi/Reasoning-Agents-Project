@@ -1,8 +1,5 @@
 import unittest
-import sys
-sys.path.append('..')
 from reachability import reachability
-
 
 
 class TestReachability(unittest.TestCase):
