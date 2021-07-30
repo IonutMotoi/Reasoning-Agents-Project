@@ -28,8 +28,12 @@ def reachability_solver(arena, R):
         queue.append(node)  # Add node at the end fo the queue
         regions[node] = 0  # Node winning for player 0
         region_0.append(node)
+
+        # Can be assigned arbitrarily
         if arena.get_player(node) == 0:
             strategy_0[node] = arena.get_successors(node)[0]
+        else:
+            strategy_1[node] = arena.get_successors(node)[0]
 
     # While queue not empty
     while queue:
@@ -49,7 +53,7 @@ def reachability_solver(arena, R):
                         queue.append(predecessor)
                         regions[predecessor] = 0
                         region_0.append(predecessor)
-
+                        strategy_1[predecessor] = node  # can be assigned arbitrarily
 
     for node in arena.get_nodes():
         if regions[node] != 0:
@@ -61,8 +65,3 @@ def reachability_solver(arena, R):
                         strategy_1[node] = successor
 
     return (region_0, strategy_0), (region_1, strategy_1)
-
-
-
-
-
