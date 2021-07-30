@@ -34,6 +34,33 @@ class Arena:
         """
         self.predecessors[node].append(predecessor)
 
+    def get_nodes(self):
+        """
+        :return: the list of all the nodes in the arena
+        """
+        return self.nodes.keys()
+
+    def get_successors(self, node):
+        """
+        :param node: id of a node
+        :return: list of the successors of the given node
+        """
+        return self.successors[node]
+
+    def get_predecessors(self, node):
+        """
+        :param node: id of a node
+        :return: list of the predecessors of the given node
+        """
+        return self.predecessors[node]
+
+    def get_player(self, node):
+        """
+        :param node: id of a node
+        :return: the player to which the node belongs
+        """
+        return self.nodes[node]
+
     def __str__(self):
         arena_str = ""
         for node in self.nodes:
