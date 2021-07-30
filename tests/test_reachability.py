@@ -1,5 +1,5 @@
 import unittest
-from reachability import reachability
+from reachability_old import reachability
 
 
 class TestReachability(unittest.TestCase):
