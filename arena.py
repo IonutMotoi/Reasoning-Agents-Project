@@ -14,6 +14,7 @@ class Arena:
         :param player:
         :return:
         """
+        self.nodes[node] = player
 
     def add_successor(self, node, successor):
         """
@@ -34,10 +35,10 @@ class Arena:
         self.predecessors[node].append(predecessor)
 
     def __str__(self):
-        arena = ""
+        arena_str = ""
         for node in self.nodes:
-            arena += str(node) + " " + str(self.nodes[node]) + "\n" + str(node) + " -> "
+            arena_str += str(node) + " Player" + str(self.nodes[node]) + "\n" + str(node) + " -> "
             for successor in self.successors[node]:
-                arena += str(successor) + ", "
-            arena += "\n"
-        return arena
+                arena_str += str(successor) + ", "
+            arena_str += "\n"
+        return arena_str

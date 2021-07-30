@@ -16,11 +16,8 @@ def load_arena(file):
             else:
                 arena.add_node(node, 1)
 
-            for succ in split_line[3].split(","):
-                arena.add_successor(node, int(succ))
-                arena.add_predecessor(int(succ), node)
+            for successor in split_line[2].split(","):
+                arena.add_successor(node, int(successor))
+                arena.add_predecessor(int(successor), node)
 
     return arena
-
-
-
