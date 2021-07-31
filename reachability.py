@@ -1,5 +1,6 @@
 from collections import defaultdict, deque
 
+
 def reachability_solver(arena, R):
     """
     Reachability solver
@@ -65,3 +66,5 @@ def reachability_solver(arena, R):
                         strategy_1[node] = successor
 
     return (region_0, strategy_0), (region_1, strategy_1)
+
+
