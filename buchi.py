@@ -61,4 +61,4 @@ def buchi_solver(arena, recurrence_set):
 
     win_player0 = [x for x in arena.get_nodes() if x not in win_player1]
 
-    return win_player1, win_player0
+    return win_player0, win_player1

@@ -3,6 +3,7 @@ from load_arena import load_arena
 from reachability import reachability_solver
 from safety import safety_solver
 from buchi import buchi_solver
+from cobuchi import cobuchi_solver
 
 arena = load_arena("example1.txt")
 
@@ -26,8 +27,10 @@ arena = load_arena("example1.txt")
 #
 # print("")
 
-F = [4, 6]
+# F = [4, 6]
+# win = buchi_solver(arena, F)
+# print(win)
 
-win = buchi_solver(arena, F)
-
+C = [2, 4, 5, 6, 7, 8]
+win = cobuchi_solver(arena, C)
 print(win)
