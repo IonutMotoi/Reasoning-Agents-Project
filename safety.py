@@ -5,7 +5,12 @@ def safety_solver(arena, s):
 
     nodes = arena.get_nodes()
 
-    print("nodes", nodes)
+    dual_arena = arena
+    for node in nodes:
+        if arena.get_player(node) == 0:
+            dual_arena.set_player(node, 1)
+        else:
+            dual_arena.set_player(node, 0)
 
     dual_set = [x for x in nodes if x not in s]
 

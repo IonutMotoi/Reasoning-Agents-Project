@@ -61,6 +61,15 @@ class Arena:
         """
         return self.nodes[node]
 
+    def set_player(self, node, i):
+        """
+        Assigns the node to a player
+        :param node: id of a node
+        :param i: the player to which the node will be assigned
+        :return:
+        """
+        self.nodes[node] = i
+
     def __str__(self):
         arena_str = ""
         for node in self.nodes:
