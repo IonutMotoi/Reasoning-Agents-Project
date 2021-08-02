@@ -26,6 +26,7 @@ def attractor(arena, s):
 
     return attr
 
+
 def attractor_with_strategy(arena, s):
     attr = s.copy()
     queue = s.copy()

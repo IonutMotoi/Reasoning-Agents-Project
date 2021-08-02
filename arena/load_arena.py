@@ -18,7 +18,7 @@ def load_arena(file):
             else:
                 arena.add_node(node, 1)
 
-            for successor in split_line[2].split(","):
+            for successor in split_line[3].split(","):
                 arena.add_successor(node, int(successor))
                 arena.add_predecessor(int(successor), node)
 
@@ -42,9 +42,9 @@ def load_arena_parity(file):
             else:
                 arena.add_node(node, 1)
 
-        # TODO: get importance
+            arena.set_importance(node, int(split_line[2]))
 
-            for successor in split_line[2].split(","):
+            for successor in split_line[3].split(","):
                 arena.add_successor(node, int(successor))
                 arena.add_predecessor(int(successor), node)
 

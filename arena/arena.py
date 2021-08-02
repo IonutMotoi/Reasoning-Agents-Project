@@ -6,6 +6,7 @@ class Arena:
         self.nodes = defaultdict(int)  # 0 or 1
         self.successors = defaultdict(list)
         self.predecessors = defaultdict(list)
+        self.importance = defaultdict(lambda: -1)
 
     def add_node(self, node, player):
         """
@@ -61,14 +62,30 @@ class Arena:
         """
         return self.nodes[node]
 
-    def set_player(self, node, i):
+    def set_player(self, node, player):
         """
         Assigns the node to a player
         :param node: id of a node
-        :param i: the player to which the node will be assigned
+        :param player: the player to which the node will be assigned
         :return:
         """
-        self.nodes[node] = i
+        self.nodes[node] = player
+
+    def set_importance(self, node, importance):
+        """
+        Adds the importance of a node
+        :param node: The node to which the importance is assigned
+        :param importance: The value of the importance
+        :return:
+        """
+        self.importance[node] = importance
+
+    def get_importance(self, node):
+        """
+        :param node: id of a node
+        :return: the importance of the given node
+        """
+        return self.importance[node]
 
     def __str__(self):
         arena_str = ""
