@@ -4,7 +4,7 @@ from solvers.safety import safety_solver
 from solvers.buchi import buchi_solver
 from solvers.cobuchi import cobuchi_solver
 
-arena = load_arena("../assets/arena1.txt")
+arena = load_arena("assets/arena1.txt")
 
 # print(arena)
 
