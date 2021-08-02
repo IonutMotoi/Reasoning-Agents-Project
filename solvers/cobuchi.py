@@ -23,6 +23,6 @@ def cobuchi_solver(arena, persistence_set):
     dual_set = [x for x in nodes if x not in persistence_set]
 
     # Swap the winning regions and strategies
-    region_1, region_0 = buchi_solver(arena, dual_set)
+    region_1, strategy_player1, region_0, strategy_player0 = buchi_solver(arena, dual_set)
 
-    return region_0, region_1
+    return region_0, strategy_player0, region_1, strategy_player1
