@@ -8,11 +8,10 @@ import argparse
 arena = load_arena("./assets/arena1.txt")
 
 # Create the parser
-my_parser = argparse.ArgumentParser(description='Choose the game to play')
-
+my_parser = argparse.ArgumentParser()
 
 # Add the arguments
-my_parser.add_argument('--x', type=str, nargs="?")
+my_parser.add_argument('--game', type=str)
 
 # Execute the parse_args() method
 args = my_parser.parse_args()
