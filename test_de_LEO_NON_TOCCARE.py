@@ -3,19 +3,35 @@ from solvers.reachability import reachability_solver
 from solvers.safety import safety_solver
 from solvers.buchi import buchi_solver
 from solvers.cobuchi import cobuchi_solver
+import argparse
 
-arena = load_arena("../assets/arena1.txt")
+arena = load_arena("./assets/arena1.txt")
+
+# Create the parser
+my_parser = argparse.ArgumentParser(description='Choose the game to play')
+# Add the arguments
+my_parser.add_argument('Reachability',
+                       type=str,
+                       help='Reachability game')
+
+# Execute the parse_args() method
+args = my_parser.parse_args()
+
+input_path = args.Reachability
 
 # print(arena)
 
+
 # Reachability solver
-# (win0, strat0), (win1, strat1) = reachability_solver(arena, [4, 5])
-# print("Reachability results:")
-# print("Winning region player 0", win0)
-# print("Strategy player 0", dict(strat0))
-# print("Winning region player 1", win1)
-# print("Strategy player 1", dict(strat1))
+(win0, strat0), (win1, strat1) = reachability_solver(arena, [4, 5])
+print("Reachability results:")
+print("Winning region player 0", win0)
+print("Strategy player 0", dict(strat0))
+print("Winning region player 1", win1)
+print("Strategy player 1", dict(strat1))
 #
+# print("")
+
 
 
 # Safety Solver
