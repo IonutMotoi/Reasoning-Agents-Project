@@ -1,4 +1,4 @@
-from buchi import buchi_solver
+from solvers.buchi import buchi_solver
 
 
 def cobuchi_solver(arena, persistence_set):

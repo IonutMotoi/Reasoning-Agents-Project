@@ -1,4 +1,4 @@
-from reachability import reachability_solver
+from solvers.reachability import reachability_solver
 
 
 def safety_solver(arena, safety_set):

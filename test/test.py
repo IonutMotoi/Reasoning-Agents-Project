@@ -1,11 +1,7 @@
-from arena import Arena
-from load_arena import load_arena
-from reachability import reachability_solver
-from safety import safety_solver
-from buchi import buchi_solver
-from cobuchi import cobuchi_solver
+from arena.load_arena import load_arena
+from solvers.cobuchi import cobuchi_solver
 
-arena = load_arena("example1.txt")
+arena = load_arena("./assets/arena1.txt")
 
 # print(arena)
 #
