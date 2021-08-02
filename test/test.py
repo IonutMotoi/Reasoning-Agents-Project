@@ -1,4 +1,5 @@
 from arena.load_arena import load_arena
+from solvers.buchi import buchi_solver
 from solvers.cobuchi import cobuchi_solver
 
 arena = load_arena("./assets/arena1.txt")
@@ -23,10 +24,13 @@ arena = load_arena("./assets/arena1.txt")
 #
 # print("")
 
-# F = [4, 6]
+F = [4, 6]
 # win = buchi_solver(arena, F)
 # print(win)
 
-C = [2, 4, 5, 6, 7, 8]
-win = cobuchi_solver(arena, C)
-print(win)
+# C = [2, 4, 5, 6, 7, 8]
+win0, strat0, win1, strat1 = buchi_solver(arena, F)
+print(win0)
+print(win1)
+print(strat0)
+print(strat1)

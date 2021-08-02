@@ -26,6 +26,40 @@ def attractor(arena, s):
 
     return attr
 
+def attractor_with_strategy(arena, s):
+    attr = s.copy()
+    queue = s.copy()
+
+    strat0 = defaultdict(lambda: -1)
+    strat1 = defaultdict(lambda: -1)
+
+    out = defaultdict(int)
+    # Compute the number of outgoing edges for each node in the arena
+    for node in arena.get_nodes():
+        out[node] = len(arena.get_successors(node))
+
+    # While the target set is not empty
+    while queue:
+        node = queue.pop()
+        for predecessor in arena.get_predecessors(node):
+            if predecessor not in attr:
+                if arena.get_player(predecessor) == 0:
+                    queue.append(predecessor)
+                    attr.append(predecessor)
+                    strat0[predecessor] = node
+                elif arena.get_player(predecessor) == 1:
+                    out[predecessor] -= 1
+                    if out[predecessor] == 0:
+                        queue.append(predecessor)
+                        attr.append(predecessor)
+                        strat1[predecessor] = node
+            elif arena.get_player(predecessor) == 1:
+                # in attraction region of player 0
+                # strategy of player 1 can be arbitrary
+                strat1[predecessor] = node
+
+    return attr, strat0, strat1
+
 
 def controlled_predecessor_player1(arena, r):
     c_pre = r.copy()
@@ -51,6 +85,7 @@ def controlled_predecessor_player1(arena, r):
 def buchi_solver(arena, recurrence_set):
     pre_win_player1 = [-1]
     win_player1 = []
+
     while pre_win_player1 != win_player1:
         pre_win_player1 = win_player1[:]
         attr_player0 = attractor(arena, recurrence_set)
@@ -61,4 +96,27 @@ def buchi_solver(arena, recurrence_set):
 
     win_player0 = [x for x in arena.get_nodes() if x not in win_player1]
 
-    return win_player0, win_player1
+    _, strategy_player0, strategy_player1 = attractor_with_strategy(arena, recurrence_set)
+
+    for node in attr_player0:
+        if arena.get_player(node) == 0:
+            if node in recurrence_set:  # node in F^m
+                successors = arena.get_successors(node)
+                for successor in successors:
+                    if successor in attr_player0:
+                        strategy_player0[node] = successor
+                        break
+            else:  # node in Attr_0(F^m) \ F^m
+                pass
+
+    for node in arena.get_nodes():
+        if arena.get_player(node) == 0:
+            if strategy_player0[node] == -1:
+                # can be arbitrary
+                strategy_player0[node] = arena.get_successors(node)[0]
+        elif arena.get_player(node) == 1:
+            for successor in arena.get_successors(node):
+                if successor in win_player1:
+                    strategy_player1[node] = successor
+
+    return win_player0, strategy_player0, win_player1, strategy_player1
