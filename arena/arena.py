@@ -47,7 +47,7 @@ class Arena:
         """
         :return: the list of all the nodes in the arena
         """
-        return list(self.nodes.keys())
+        return self.nodes.keys()
 
     def get_successors(self, node):
         """
@@ -101,7 +101,7 @@ class Arena:
         :param nodes: the list of nodes that the sub-arena will contain.
         :return: a sub-arena.
         """
-        sub_arena = self.__class__()
+        sub_arena = Arena()
         for node in nodes:
             sub_arena.nodes[node] = self.nodes[node]
             sub_arena.importance[node] = self.importance[node]
@@ -113,6 +113,8 @@ class Arena:
         return sub_arena
 
     def get_min_importance(self):
+        importance_list = [x for x in self.importance.values()]
+        print(importance_list)
         return min(self.importance.values())
 
     def __str__(self):

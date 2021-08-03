@@ -45,7 +45,7 @@ def parity_solver(arena):
     print("NODES:", nodes)
     # Minimal color occurring in the game
     d = arena.get_min_importance()
-
+    print("MIN IMPORTANCE", d)
     # Parity of the minimal color occurring in the game
     i = d % 2
 
@@ -57,7 +57,7 @@ def parity_solver(arena):
     print("Set D =", set_d)
 
     # Attractor A of the region D
-    attractor_i = attractor(arena, set_d)
+    attractor_i = attractor(arena, set_d, i)
     print("Attractor region player", i, ":", attractor_i)
 
     # V \ A
@@ -66,25 +66,39 @@ def parity_solver(arena):
 
     # Case 1 -> A = V
     if not attractor_i_prime:
-        win_player0 = nodes
-        win_player1 = []
+        print("CASE 1")
+        if i == 0:
+            win_player0 = [x for x in nodes]
+            win_player1 = []
+        elif i == 1:
+            win_player0 = []
+            win_player1 = [x for x in nodes]
         return win_player0, win_player1
     # Case 2 -> A != V
     else:
+        print("CASE 2")
         sub_arena = arena.get_sub_arena(attractor_i_prime)
         win_player0, win_player1 = parity_solver(sub_arena)
+        print("win_player0", win_player0, "win_player1", win_player1)
 
         # Subcase 1 -> win_player1 is empty set
         if not win_player1:
-            win_player0 = nodes
+            print("SUBCASE 1")
+            win_player0 = [x for x in nodes]
             win_player1 = []
             return win_player0, win_player1
 
         # Subcase 2 -> win_player1 not empty set
         else:
-            attractor_b = attractor(sub_arena, win_player1)
-            sub_arena_2 = sub_arena.get_sub_arena(attractor_b)
+            print("SUBCASE 2")
+            if i == 1:
+                i = 0
+            elif i == 0:
+                i = 1
+            attractor_b = attractor(sub_arena, win_player1, i)
+            attractor_b_prime = [x for x in nodes if x not in attractor_b]
+            sub_arena_2 = sub_arena.get_sub_arena(attractor_b_prime)
             win_player0_b, win_player1_b = parity_solver(sub_arena_2)
-            win_player1.append(win_player1_b)
+            win_player1.extend(win_player1_b)
             return win_player0, win_player1
 
