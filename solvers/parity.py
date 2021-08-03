@@ -1,45 +1,8 @@
 from collections import defaultdict
 from solvers.buchi import attractor
-
+import copy
 
 def parity_solver(arena):
-
-    # print("nodes in arena", nodes)
-    # if nodes:
-    #     pass
-    # else:
-    #     return None, None
-    # importance = defaultdict(lambda:-1)
-    # for node in nodes:
-    #     importance[node] = arena.get_importance(node)  # create dict with nodes and priority
-    # p = max(importance.values())  # maximum value of priority
-
-    # print("importance with nodes", dict(importance))
-    # print("maximum importance", p)
-
-    # if p == 0:
-    #     win_player0 = nodes
-    #     win_player1 = []
-    #     return win_player0, win_player1
-    # else:
-    #     u = []
-    #     # get nodes in arena with max priority p
-    #     for nodes in importance:
-    #         if importance[nodes] == p:
-    #             u.append(nodes)
-    #     # let i the player associated with the maximum priority
-    #     i = p % 2
-    #     attractor_i = attractor(arena, u)
-    #     print("attractor region player i", attractor_i)
-    #
-    #     nodes = arena.get_nodes()  # need to recompute since it's modified, then let's see
-    #     new_set = [x for x in nodes if x not in attractor_i]
-    #     print("new set of nodes in arena", new_set)
-    #     for node in attractor_i:
-    #         arena.remove_node(node)
-    #     # print("New graph, with nodes from attractor region removed", arena)
-    #     win_player0, win_player1 = parity_solver(arena)
-
     # V
     nodes = arena.get_nodes()
     print("NODES:", nodes)
@@ -77,8 +40,10 @@ def parity_solver(arena):
     # Case 2 -> A != V
     else:
         print("CASE 2")
-        sub_arena = arena.get_sub_arena(attractor_i_prime)
+        copy_arena = copy.copy(arena)
+        sub_arena = copy_arena.get_sub_arena(attractor_i_prime)
         win_player0, win_player1 = parity_solver(sub_arena)
+        print("CONT. CASE 2")
         print("win_player0", win_player0, "win_player1", win_player1)
 
         # Subcase 1 -> win_player1 is empty set
@@ -91,14 +56,16 @@ def parity_solver(arena):
         # Subcase 2 -> win_player1 not empty set
         else:
             print("SUBCASE 2")
-            if i == 1:
-                i = 0
-            elif i == 0:
-                i = 1
-            attractor_b = attractor(sub_arena, win_player1, i)
+
+            attractor_b = attractor(sub_arena, win_player1, 1 if i == 0 else 0)
+            print("attractor_b =", attractor_b)
             attractor_b_prime = [x for x in nodes if x not in attractor_b]
-            sub_arena_2 = sub_arena.get_sub_arena(attractor_b_prime)
+            print("B_prime =", attractor_b_prime)
+
+            copy_arena_2 = copy.copy(copy_arena)
+            sub_arena_2 = copy_arena_2.get_sub_arena(attractor_b_prime)
             win_player0_b, win_player1_b = parity_solver(sub_arena_2)
+            print("CONT. SUBCASE 2")
             win_player1.extend(win_player1_b)
             return win_player0, win_player1
 

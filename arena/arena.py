@@ -101,7 +101,7 @@ class Arena:
         :param nodes: the list of nodes that the sub-arena will contain.
         :return: a sub-arena.
         """
-        sub_arena = Arena()
+        sub_arena = self.__class__()
         for node in nodes:
             sub_arena.nodes[node] = self.nodes[node]
             sub_arena.importance[node] = self.importance[node]
@@ -113,8 +113,6 @@ class Arena:
         return sub_arena
 
     def get_min_importance(self):
-        importance_list = [x for x in self.importance.values()]
-        print(importance_list)
         return min(self.importance.values())
 
     def __str__(self):
