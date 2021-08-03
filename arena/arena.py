@@ -47,7 +47,7 @@ class Arena:
         """
         :return: the list of all the nodes in the arena
         """
-        return self.nodes.keys()
+        return list(self.nodes.keys())
 
     def get_successors(self, node):
         """
@@ -94,6 +94,26 @@ class Arena:
         :return: the importance of the given node
         """
         return self.importance[node]
+
+    def get_sub_arena(self, nodes):
+        """
+        Creates a sub-arena from the current game. The sub-game will contain all nodes in the provided set.
+        :param nodes: the list of nodes that the sub-arena will contain.
+        :return: a sub-arena.
+        """
+        sub_arena = self.__class__()
+        for node in nodes:
+            sub_arena.nodes[node] = self.nodes[node]
+            sub_arena.importance[node] = self.importance[node]
+        for node in sub_arena.nodes:
+            for successor in self.successors[node]:
+                if successor in sub_arena.nodes:
+                    sub_arena.successors[node].append(successor)
+                    sub_arena.predecessors[successor].append(node)
+        return sub_arena
+
+    def get_min_importance(self):
+        return min(self.importance.values())
 
     def __str__(self):
         arena_str = ""
