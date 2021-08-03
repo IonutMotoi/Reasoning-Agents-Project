@@ -17,6 +17,14 @@ class Arena:
         """
         self.nodes[node] = player
 
+    def remove_node(self, node):
+        """
+        Adds a node to the arena with the relative player
+        :param node:
+        :return:
+        """
+        del self.nodes[node]
+
     def add_successor(self, node, successor):
         """
         Adds a successor to the successors list of the given node
