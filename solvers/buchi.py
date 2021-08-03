@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 
-def attractor(arena, s):
+def attractor(arena, s, i=0):
     attr = s.copy()
     queue = s.copy()
 
@@ -15,10 +15,10 @@ def attractor(arena, s):
         node = queue.pop()
         for predecessor in arena.get_predecessors(node):
             if predecessor not in attr:
-                if arena.get_player(predecessor) == 0:
+                if arena.get_player(predecessor) == i:
                     queue.append(predecessor)
                     attr.append(predecessor)
-                elif arena.get_player(predecessor) == 1:
+                elif arena.get_player(predecessor) != i:
                     out[predecessor] -= 1
                     if out[predecessor] == 0:
                         queue.append(predecessor)

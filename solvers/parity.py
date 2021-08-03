@@ -82,7 +82,7 @@ def parity_solver(arena):
 
         # Subcase 2 -> win_player1 not empty set
         else:
-            attractor_b = attractor(win_player1)
+            attractor_b = attractor(sub_arena, win_player1)
             sub_arena_2 = sub_arena.get_sub_arena(attractor_b)
             win_player0_b, win_player1_b = parity_solver(sub_arena_2)
             win_player1.append(win_player1_b)
