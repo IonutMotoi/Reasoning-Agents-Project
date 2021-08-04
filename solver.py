@@ -14,7 +14,7 @@ my_parser = argparse.ArgumentParser(description='Solver for different types of g
 
 # Add the arguments
 my_parser.add_argument('--game', type=str, required=False, help="The type of game to be solved")
-my_parser.add_argument('--arena', type=str, default="assets/arena1.txt", help="Path to the arena txt file")
+my_parser.add_argument('--arena', type=str, default="assets/arena3.txt", help="Path to the arena txt file")
 my_parser.add_argument('--target', type=int, nargs='+', default=None, help="Target set for the game")
 
 # Execute the parse_args() method
@@ -55,6 +55,6 @@ elif args.game == "cobuchi":
 # Parity solver
 elif args.game == "parity":
     arena = load_arena_parity(args.arena)
-    parity_solver(arena)
-    # win0, win1 = parity_solver(arena)
-    # print_results("Parity", win0, win1, [], [])
+    # parity_solver(arena)
+    win0, win1 = parity_solver(arena)
+    print_results("Parity", win0, win1, [], [])
