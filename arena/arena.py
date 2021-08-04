@@ -112,8 +112,8 @@ class Arena:
                     sub_arena.predecessors[successor].append(node)
         return sub_arena
 
-    def get_min_importance(self):
-        return min(self.importance.values())
+    def get_max_importance(self):
+        return max(self.importance.values())
 
     def __str__(self):
         arena_str = ""
