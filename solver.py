@@ -55,6 +55,5 @@ elif args.game == "cobuchi":
 # Parity solver
 elif args.game == "parity":
     arena = load_arena_parity(args.arena)
-    # parity_solver(arena)
     win0, win1 = parity_solver(arena)
     print_results("Parity", win0, win1, [], [])
