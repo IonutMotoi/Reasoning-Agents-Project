@@ -39,14 +39,12 @@ def parity_solver(arena):
     print("A_prime =", attractor_i_prime)
 
     # Create the sub arena
-    # copy_arena = copy.copy(arena)
     sub_arena = arena.get_sub_arena(attractor_i_prime)
-    win_player, win_opponent = parity_solver(sub_arena)
 
-    if player == 1:
-        temp = win_player.copy()
-        win_player = win_opponent
-        win_opponent = temp
+    if player == 0:
+        win_player, win_opponent = parity_solver(sub_arena)
+    else:
+        win_opponent, win_player = parity_solver(sub_arena)
 
     if not win_opponent:
         if player == 0:
@@ -61,8 +59,8 @@ def parity_solver(arena):
         attractor_b_prime = [x for x in arena.nodes if x not in attractor_b]
         print("B_prime =", attractor_b_prime)
 
-        # copy_arena_2 = copy.copy(copy_arena)
         sub_arena_2 = arena.get_sub_arena(attractor_b_prime)
+
         win_player_b, win_opponent_b = parity_solver(sub_arena_2)
 
         if player == 0:
