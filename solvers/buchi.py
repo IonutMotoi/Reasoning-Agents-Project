@@ -39,9 +39,9 @@ def attractor_with_strategy(arena, s, i=0):
     for node in arena.get_nodes():
         out[node] = len(arena.get_successors(node))
         if node in s:
-            if i == 0:
+            if arena.get_player(node) == i:
                 strat0[node] = arena.get_successors(node)[0]
-            elif i == 1:
+            else:
                 strat1[node] = arena.get_successors(node)[0]
 
     # While the target set is not empty
