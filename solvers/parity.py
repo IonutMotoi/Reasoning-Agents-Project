@@ -131,7 +131,7 @@ def parity_solver_strategy(arena):
             strat1.update(strategy_i)
             strat1.update(strat_player)
     else:
-        attractor_b, strategy_b, _ = attractor_with_strategy(arena, win_opponent, opponent)
+        attractor_b, strategy_b, strategy_prova_b = attractor_with_strategy(arena, win_opponent, opponent)
         print("attractor_b =", attractor_b)
 
         attractor_b_prime = [x for x in arena.nodes if x not in attractor_b]

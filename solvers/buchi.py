@@ -38,10 +38,16 @@ def attractor_with_strategy(arena, s, i=0):
     # Compute the number of outgoing edges for each node in the arena
     for node in arena.get_nodes():
         out[node] = len(arena.get_successors(node))
+        if node in s:
+            if i == 0:
+                strat0[node] = arena.get_successors(node)[0]
+            elif i == 1:
+                strat1[node] = arena.get_successors(node)[0]
 
     # While the target set is not empty
     while queue:
         node = queue.pop()
+        print(arena.get_predecessors(node))
         for predecessor in arena.get_predecessors(node):
             if predecessor not in attr:
                 if arena.get_player(predecessor) == i:
