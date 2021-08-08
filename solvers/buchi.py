@@ -27,7 +27,7 @@ def attractor(arena, s, i=0):
     return attr
 
 
-def attractor_with_strategy(arena, s):
+def attractor_with_strategy(arena, s, i=0):
     attr = s.copy()
     queue = s.copy()
 
@@ -44,17 +44,17 @@ def attractor_with_strategy(arena, s):
         node = queue.pop()
         for predecessor in arena.get_predecessors(node):
             if predecessor not in attr:
-                if arena.get_player(predecessor) == 0:
+                if arena.get_player(predecessor) == i:
                     queue.append(predecessor)
                     attr.append(predecessor)
                     strat0[predecessor] = node
-                elif arena.get_player(predecessor) == 1:
+                elif arena.get_player(predecessor) != i:
                     out[predecessor] -= 1
                     if out[predecessor] == 0:
                         queue.append(predecessor)
                         attr.append(predecessor)
                         strat1[predecessor] = node
-            elif arena.get_player(predecessor) == 1:
+            elif arena.get_player(predecessor) != i:
                 # in attraction region of player 0
                 # strategy of player 1 can be arbitrary
                 strat1[predecessor] = node
