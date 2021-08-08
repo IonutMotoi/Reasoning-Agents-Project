@@ -118,7 +118,7 @@ class Arena:
     def __str__(self):
         arena_str = ""
         for node in self.nodes:
-            arena_str += str(node) + " Player" + str(self.nodes[node]) + "\n" + str(node) + " -> "
+            arena_str += "(Player" + str(self.nodes[node]) + ") " + str(node) + " -> "
             for successor in self.successors[node]:
                 arena_str += str(successor) + ", "
             arena_str += "\n"
