@@ -1,24 +1,27 @@
-from arena.load_arena import load_arena, load_arena_parity
-from tools.output import print_results
+import argparse
+import os
 
+from arena.load_arena import load_arena, load_arena_parity
+from tools.output import print_results, save_results
 from solvers.reachability import reachability_solver
 from solvers.safety import safety_solver
 from solvers.buchi import buchi_solver
 from solvers.cobuchi import cobuchi_solver
 from solvers.parity import parity_solver
 
-import argparse
-
 # Create the parser
 my_parser = argparse.ArgumentParser(description='Solver for different types of games on graphs')
 
 # Add the arguments
 my_parser.add_argument('--game', type=str, required=False, help="The type of game to be solved")
-my_parser.add_argument('--arena', type=str, default="assets/arenawiki.txt", help="Path to the arena txt file")
+my_parser.add_argument('--arena', type=str, default="assets/arena0.txt", help="Path to the arena txt file")
 my_parser.add_argument('--target', type=int, nargs='+', default=None, help="Target set for the game")
 
 # Execute the parse_args() method
 args = my_parser.parse_args()
+
+# Extract the name of the arena from the path
+arena_name = os.path.basename(args.arena)
 
 # Reachability solver
 if args.game == "reachability":
@@ -27,6 +30,7 @@ if args.game == "reachability":
     print("Reachability set =", R)
     (win0, strat0), (win1, strat1) = reachability_solver(arena, R)
     print_results("Reachability", win0, win1, strat0, strat1)
+    save_results("Reachability", arena_name, win0, win1, strat0, strat1)
 
 # Safety Solver
 elif args.game == "safety":
@@ -35,6 +39,7 @@ elif args.game == "safety":
     print("Safety set =", S)
     (win0, strat0), (win1, strat1) = safety_solver(arena, S)
     print_results("Safety", win0, win1, strat0, strat1)
+    save_results("Safety", arena_name, win0, win1, strat0, strat1)
 
 # Buchi solver
 elif args.game == "buchi":
@@ -43,6 +48,7 @@ elif args.game == "buchi":
     print("Recurrence set =", F)
     win0, strat0, win1, strat1 = buchi_solver(arena, F)
     print_results("Buchi", win0, win1, strat0, strat1)
+    save_results("Buchi", arena_name, win0, win1, strat0, strat1)
 
 # Co-buchi solver
 elif args.game == "cobuchi":
@@ -51,9 +57,11 @@ elif args.game == "cobuchi":
     print("Persistence set =", C)
     win0, strat0, win1, strat1 = cobuchi_solver(arena, C)
     print_results("Co-buchi", win0, win1, strat0, strat1)
+    save_results("Co-buchi", arena_name, win0, win1, strat0, strat1)
 
 # Parity solver
 elif args.game == "parity":
     arena = load_arena_parity(args.arena)
     win0, win1 = parity_solver(arena)
     print_results("Parity", win0, win1, [], [])
+    save_results("Parity", arena_name, win0, win1, [], [])
