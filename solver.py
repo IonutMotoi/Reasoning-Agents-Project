@@ -7,14 +7,14 @@ from solvers.reachability import reachability_solver
 from solvers.safety import safety_solver
 from solvers.buchi import buchi_solver
 from solvers.cobuchi import cobuchi_solver
-from solvers.parity import parity_solver
+from solvers.parity import parity_solver, parity_solver_strategy
 
 # Create the parser
 my_parser = argparse.ArgumentParser(description='Solver for different types of games on graphs')
 
 # Add the arguments
 my_parser.add_argument('--game', type=str, required=False, help="The type of game to be solved")
-my_parser.add_argument('--arena', type=str, default="assets/arena0.txt", help="Path to the arena txt file")
+my_parser.add_argument('--arena', type=str, default="assets/arenawiki.txt", help="Path to the arena txt file")
 my_parser.add_argument('--target', type=int, nargs='+', default=None, help="Target set for the game")
 
 # Execute the parse_args() method
@@ -62,6 +62,6 @@ elif args.game == "cobuchi":
 # Parity solver
 elif args.game == "parity":
     arena = load_arena_parity(args.arena)
-    win0, win1 = parity_solver(arena)
-    print_results("Parity", win0, win1, [], [])
-    save_results("Parity", arena_name, win0, win1, [], [])
+    win0, win1, strat0, strat1 = parity_solver_strategy(arena)
+    print_results("Parity", win0, win1, strat0, strat1)
+    save_results("Parity", arena_name, win0, win1, strat0, strat1)
