@@ -139,25 +139,30 @@ def parity_solver_strategy(arena):
 
         sub_arena_2 = arena.get_sub_arena(attractor_b_prime)
 
-        win_player_b, win_opponent_b, strat_player_b, strat_opponent_b = parity_solver_strategy(sub_arena_2)
-
         if player == 0:
+            win_player_b, win_opponent_b, strat_player_b, strat_opponent_b = parity_solver_strategy(sub_arena_2)
+
             win_0.extend(win_player_b)
+
             win_1.extend(win_opponent_b)
             win_1.extend(attractor_b)
 
             strat0.update(strat_player_b)
+
             strat1.update(strategy_b)
             strat1.update(strat_opponent_b)
             strat1.update(strat_opponent)
+        else:
+            win_opponent_b, win_player_b, strat_opponent_b, strat_player_b = parity_solver_strategy(sub_arena_2)
 
-        elif player == 1:
             win_0.extend(win_opponent_b)
             win_0.extend(attractor_b)
+
             win_1.extend(win_player_b)
 
-            strat1.update(strat_player_b)
             strat0.update(strategy_b)
             strat0.update(strat_opponent_b)
             strat0.update(strat_opponent)
+
+            strat1.update(strat_player_b)
     return win_0, win_1, strat0, strat1
