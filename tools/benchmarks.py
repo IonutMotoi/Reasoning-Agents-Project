@@ -32,100 +32,163 @@ args = my_parser.parse_args()
 # Reachability solver
 if args.game == "reachability":
 
-    arena0 = load_arena("../assets/random_arenas/ran_arena_10_10_2.txt")
-    arena1 = load_arena("../assets/random_arenas/ran_arena_100_100_20.txt")
-    arena2 = load_arena("../assets/random_arenas/ran_arena_1000_1000_200.txt")
-    arena3 = load_arena("../assets/random_arenas/ran_arena_10000_10000_2000.txt")
-    #arena4 = load_arena("../random_arenas/ran_arena_100000_100000_20000.txt")
+    arena0 = load_arena("assets/random_arenas/ran_arena_10_10_2.txt")
+    arena1 = load_arena("assets/random_arenas/ran_arena_100_100_20.txt")
+    arena2 = load_arena("assets/random_arenas/ran_arena_1000_1000_200.txt")
+    arena3 = load_arena("assets/random_arenas/ran_arena_10000_10000_2000.txt")
 
     R = args.target or [4, 5]
     times = []
 
     start = time.time()
     win0, strat0, win1, strat1 = reachability_solver(arena0, R)
-    times.append(time.time()-start)
-    print("Reachability time", times)
+    times.append(time.time() - start)
+    print("Arena0 done")
 
     start = time.time()
     win0, strat0, win1, strat1 = reachability_solver(arena1, R)
     times.append(time.time() - start)
-    print("Reachability time", times)
+    print("Arena1 done")
 
     start = time.time()
     win0, strat0, win1, strat1 = reachability_solver(arena2, R)
     times.append(time.time() - start)
-    print("Reachability time", times)
+    print("Arena2 done")
 
     start = time.time()
     win0, strat0, win1, strat1 = reachability_solver(arena3, R)
     times.append(time.time() - start)
-    print("Reachability time", times)
+    print("Arena3 done")
 
-
+    print("Reachability times", times)
 
 # Safety Solver
 elif args.game == "safety":
 
-    arena0 = load_arena("../random_arenas/ran_arena_10_10_5.txt")
-    arena1 = load_arena("../random_arenas/ran_arena_100_100_50.txt")
-    arena2 = load_arena("../random_arenas/ran_arena_1000_1000_500.txt")
-    arena3 = load_arena("../random_arenas/ran_arena_10000_10000_5000.txt")
-    # arena4 = load_arena("../random_arenas/ran_arena_100000_100000_50000.txt")
+    arena0 = load_arena("assets/random_arenas/ran_arena_10_10_2.txt")
+    arena1 = load_arena("assets/random_arenas/ran_arena_100_100_20.txt")
+    arena2 = load_arena("assets/random_arenas/ran_arena_1000_1000_200.txt")
+    arena3 = load_arena("assets/random_arenas/ran_arena_10000_10000_2000.txt")
 
     S = args.target or [1, 2, 3, 4, 5, 7, 8]
-    print("Safety set =", S)
+    times = []
+
     start = time.time()
-    win0, strat0, win1, strat1 = safety_solver(arena, S)
-    safety_time = time.time() - start
-    print("Safety time", safety_time)
+    win0, strat0, win1, strat1 = safety_solver(arena0, S)
+    times.append(time.time() - start)
+    print("Arena0 done")
+
+    start = time.time()
+    win0, strat0, win1, strat1 = safety_solver(arena1, S)
+    times.append(time.time() - start)
+    print("Arena1 done")
+
+    start = time.time()
+    win0, strat0, win1, strat1 = safety_solver(arena2, S)
+    times.append(time.time() - start)
+    print("Arena2 done")
+
+    start = time.time()
+    win0, strat0, win1, strat1 = safety_solver(arena3, S)
+    times.append(time.time() - start)
+    print("Arena3 done")
+
+    print("Safety times", times)
 
 # Buchi solver
 elif args.game == "buchi":
 
-    arena0 = load_arena("../random_arenas/ran_arena_10_10_5.txt")
-    arena1 = load_arena("../random_arenas/ran_arena_100_100_50.txt")
-    arena2 = load_arena("../random_arenas/ran_arena_1000_1000_500.txt")
-    arena3 = load_arena("../random_arenas/ran_arena_10000_10000_5000.txt")
-    # arena4 = load_arena("../random_arenas/ran_arena_100000_100000_50000.txt")
+    arena0 = load_arena("assets/random_arenas/ran_arena_10_10_2.txt")
+    arena1 = load_arena("assets/random_arenas/ran_arena_100_100_20.txt")
+    arena2 = load_arena("assets/random_arenas/ran_arena_1000_1000_200.txt")
+    arena3 = load_arena("assets/random_arenas/ran_arena_10000_10000_2000.txt")
 
     F = args.target or [4, 6]
-    print("Recurrence set =", F)
+    times = []
+
     start = time.time()
-    win0, strat0, win1, strat1 = buchi_solver(arena, F)
-    buchi_time = time.time() - start
-    print("Buchi time", buchi_time)
+    win0, strat0, win1, strat1 = buchi_solver(arena0, F)
+    times.append(time.time() - start)
+    print("Arena0 done")
+
+    start = time.time()
+    win0, strat0, win1, strat1 = buchi_solver(arena1, F)
+    times.append(time.time() - start)
+    print("Arena1 done")
+
+    start = time.time()
+    win0, strat0, win1, strat1 = buchi_solver(arena2, F)
+    times.append(time.time() - start)
+    print("Arena2 done")
+
+    start = time.time()
+    win0, strat0, win1, strat1 = buchi_solver(arena3, F)
+    times.append(time.time() - start)
+    print("Arena3 done")
+
+    print("Buchi times", times)
 
 # Co-buchi solver
 elif args.game == "cobuchi":
 
-    arena0 = load_arena("../random_arenas/ran_arena_10_10_5.txt")
-    arena1 = load_arena("../random_arenas/ran_arena_100_100_50.txt")
-    arena2 = load_arena("../random_arenas/ran_arena_1000_1000_500.txt")
-    arena3 = load_arena("../random_arenas/ran_arena_10000_10000_5000.txt")
-    # arena4 = load_arena("../random_arenas/ran_arena_100000_100000_50000.txt")
+    arena0 = load_arena("assets/random_arenas/ran_arena_10_10_2.txt")
+    arena1 = load_arena("assets/random_arenas/ran_arena_100_100_20.txt")
+    arena2 = load_arena("assets/random_arenas/ran_arena_1000_1000_200.txt")
+    arena3 = load_arena("assets/random_arenas/ran_arena_10000_10000_2000.txt")
 
     C = args.target or [2, 4, 5, 6, 7, 8]
-    print("Persistence set =", C)
+    times = []
+
     start = time.time()
-    win0, strat0, win1, strat1 = cobuchi_solver(arena, C)
-    cobuchi_time = time.time() - start
-    print("Co-Buchi time", cobuchi_time)
+    win0, strat0, win1, strat1 = cobuchi_solver(arena0, C)
+    times.append(time.time() - start)
+    print("Arena0 done")
+
+    start = time.time()
+    win0, strat0, win1, strat1 = cobuchi_solver(arena1, C)
+    times.append(time.time() - start)
+    print("Arena1 done")
+
+    start = time.time()
+    win0, strat0, win1, strat1 = cobuchi_solver(arena2, C)
+    times.append(time.time() - start)
+    print("Arena2 done")
+
+    start = time.time()
+    win0, strat0, win1, strat1 = cobuchi_solver(arena3, C)
+    times.append(time.time() - start)
+    print("Arena3 done")
+
+    print("Co-buchi times", times)
 
 
 # Parity solver
 elif args.game == "parity":
+    arena0 = load_arena_parity("assets/random_arenas/ran_arena_10_10_2.txt")
+    arena1 = load_arena_parity("assets/random_arenas/ran_arena_100_100_20.txt")
+    arena2 = load_arena_parity("assets/random_arenas/ran_arena_1000_1000_200.txt")
+    arena3 = load_arena_parity("assets/random_arenas/ran_arena_10000_10000_2000.txt")
 
-    arena0 = load_arena_parity("../random_arenas/ran_arena_10_10_5.txt")
-    arena1 = load_arena_parity("../random_arenas/ran_arena_100_100_50.txt")
-    arena2 = load_arena_parity("../random_arenas/ran_arena_1000_1000_500.txt")
-    arena3 = load_arena_parity("../random_arenas/ran_arena_10000_10000_5000.txt")
-    # arena4 = load_arena_parity("../random_arenas/ran_arena_100000_100000_50000.txt")
+    times = []
 
     start = time.time()
     win0, win1, strat0, strat1 = parity_solver_strategy(arena0)
-    parity_time = time.time() - start
-    print("Parity time", parity_time)
+    times.append(time.time() - start)
+    print("Arena0 done")
 
+    start = time.time()
+    win0, win1, strat0, strat1 = parity_solver_strategy(arena1)
+    times.append(time.time() - start)
+    print("Arena1 done")
 
+    start = time.time()
+    win0, win1, strat0, strat1 = parity_solver_strategy(arena2)
+    times.append(time.time() - start)
+    print("Arena2 done")
 
+    start = time.time()
+    win0, win1, strat0, strat1 = parity_solver_strategy(arena3)
+    times.append(time.time() - start)
+    print("Arena3 done")
 
+    print("Parity times", times)
