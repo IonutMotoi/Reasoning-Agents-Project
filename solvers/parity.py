@@ -103,7 +103,7 @@ def parity_solver_strategy(arena):
     for node in arena.nodes:
         if arena.get_importance(node) == p:
             set_u.append(node)
-    print("Set U =", set_u)  # Okay, since set_u is a list
+    print("Set U =", set_u)
 
     # Attractor A of the region U
     attractor_i, strategy_i, _ = attractor_with_strategy(arena, set_u, player)

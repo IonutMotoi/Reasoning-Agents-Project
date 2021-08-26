@@ -23,6 +23,6 @@ def safety_solver(arena, safety_set):
     dual_set = [x for x in nodes if x not in safety_set]
 
     # Swap the winning regions and strategies
-    (region_1, strategy_1), (region_0, strategy_0),  = reachability_solver(arena, dual_set)
+    region_1, strategy_1, region_0, strategy_0,  = reachability_solver(arena, dual_set)
 
-    return (region_0, strategy_0), (region_1, strategy_1)
+    return region_0, strategy_0, region_1, strategy_1

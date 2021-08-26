@@ -65,6 +65,6 @@ def reachability_solver(arena, R):
                     if regions[successor] != 0:
                         strategy_1[node] = successor
 
-    return (region_0, strategy_0), (region_1, strategy_1)
+    return region_0, strategy_0, region_1, strategy_1
 
 

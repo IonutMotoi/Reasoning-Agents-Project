@@ -28,7 +28,7 @@ if args.game == "reachability":
     arena = load_arena(args.arena)
     R = args.target or [4, 5]
     print("Reachability set =", R)
-    (win0, strat0), (win1, strat1) = reachability_solver(arena, R)
+    win0, strat0, win1, strat1 = reachability_solver(arena, R)
     print_results("Reachability", win0, win1, strat0, strat1)
     save_results("Reachability", arena_name, win0, win1, strat0, strat1)
 
@@ -37,7 +37,7 @@ elif args.game == "safety":
     arena = load_arena(args.arena)
     S = args.target or [1, 2, 3, 4, 5, 7, 8]
     print("Safety set =", S)
-    (win0, strat0), (win1, strat1) = safety_solver(arena, S)
+    win0, strat0, win1, strat1 = safety_solver(arena, S)
     print_results("Safety", win0, win1, strat0, strat1)
     save_results("Safety", arena_name, win0, win1, strat0, strat1)
 

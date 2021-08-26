@@ -3,7 +3,7 @@ from collections import defaultdict
 
 class Arena:
     def __init__(self):
-        self.nodes = defaultdict(int)  # 0 or 1
+        self.nodes = defaultdict(int)  # 0 or 1 -> Player 0 or Player 1
         self.successors = defaultdict(list)
         self.predecessors = defaultdict(list)
         self.importance = defaultdict(lambda: -1)
