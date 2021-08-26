@@ -48,9 +48,4 @@ def generate_random_arena(num_nodes, max_priority, max_successors):
     file.close()
 
 
-generate_random_arena(10, 10, 10)
-generate_random_arena(100, 10, 100)
-generate_random_arena(1000, 100, 100)
-generate_random_arena(1000, 1000, 50)
-generate_random_arena(10000, 1000, 10)
-generate_random_arena(10000, 10000, 1000)
+generate_random_arena(10000, 10000, 2000)
