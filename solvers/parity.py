@@ -11,7 +11,6 @@ def parity_solver(arena):
 
     # Minimal color occurring in the game
     p = arena.get_max_importance()
-    print("MAX IMPORTANCE", p)
 
     # Parity of the minimal color occurring in the game
     player = p % 2
@@ -27,15 +26,12 @@ def parity_solver(arena):
     for node in arena.nodes:
         if arena.get_importance(node) == p:
             set_u.append(node)
-    print("Set U =", set_u)  # Okay, since set_u is a list
 
     # Attractor A of the region U
     attractor_i = attractor(arena, set_u, player)
-    print("Attractor region player", player, ":", attractor_i)
 
     # V \ A
     attractor_i_prime = [x for x in arena.nodes if x not in attractor_i]
-    print("A_prime =", attractor_i_prime)
 
     # Create the sub arena
     sub_arena = arena.get_sub_arena(attractor_i_prime)
@@ -53,10 +49,8 @@ def parity_solver(arena):
     else:
 
         attractor_b = attractor(arena, win_opponent, opponent)  # REMEMBER TO INSERT ARENA, NOT SUB ARENA IF NOT WORKING
-        print("attractor_b =", attractor_b)
 
         attractor_b_prime = [x for x in arena.nodes if x not in attractor_b]
-        print("B_prime =", attractor_b_prime)
 
         sub_arena_2 = arena.get_sub_arena(attractor_b_prime)
 
@@ -87,7 +81,6 @@ def parity_solver_strategy(arena):
 
     # Minimal color occurring in the game
     p = arena.get_max_importance()
-    print("MAX IMPORTANCE", p)
 
     # Parity of the minimal color occurring in the game
     player = p % 2
@@ -103,15 +96,12 @@ def parity_solver_strategy(arena):
     for node in arena.nodes:
         if arena.get_importance(node) == p:
             set_u.append(node)
-    print("Set U =", set_u)
 
     # Attractor A of the region U
     attractor_i, strategy_i, _ = attractor_with_strategy(arena, set_u, player)
-    print("Attractor region player", player, ":", attractor_i)
 
     # V \ A
     attractor_i_prime = [x for x in arena.nodes if x not in attractor_i]
-    print("A_prime =", attractor_i_prime)
 
     # Create the sub arena
     sub_arena = arena.get_sub_arena(attractor_i_prime)
@@ -132,10 +122,8 @@ def parity_solver_strategy(arena):
             strat1.update(strat_player)
     else:
         attractor_b, strategy_b, strategy_prova_b = attractor_with_strategy(arena, win_opponent, opponent)
-        print("attractor_b =", attractor_b)
 
         attractor_b_prime = [x for x in arena.nodes if x not in attractor_b]
-        print("B_prime =", attractor_b_prime)
 
         sub_arena_2 = arena.get_sub_arena(attractor_b_prime)
 
