@@ -1,14 +1,13 @@
 import argparse
 import os
 import time
-from random_arena import generate_random_arena
+from .random_arena import generate_random_arena
 from arena.load_arena import load_arena, load_arena_parity
-from tools.output import print_results, save_results
 from solvers.reachability import reachability_solver
 from solvers.safety import safety_solver
 from solvers.buchi import buchi_solver
 from solvers.cobuchi import cobuchi_solver
-from solvers.parity import parity_solver, parity_solver_strategy
+from solvers.parity import parity_solver_strategy
 
 # Create the parser
 my_parser = argparse.ArgumentParser(description='Benchmarks for different types of games on graphs')
@@ -37,7 +36,7 @@ if args.game == "reachability":
     arena1 = load_arena("../assets/random_arenas/ran_arena_100_100_20.txt")
     arena2 = load_arena("../assets/random_arenas/ran_arena_1000_1000_200.txt")
     arena3 = load_arena("../assets/random_arenas/ran_arena_10000_10000_2000.txt")
-    # arena4 = load_arena("../random_arenas/ran_arena_100000_100000_50000.txt")
+    #arena4 = load_arena("../random_arenas/ran_arena_100000_100000_20000.txt")
 
     R = args.target or [4, 5]
     times = []
