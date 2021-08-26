@@ -6,7 +6,7 @@ def reachability_solver(arena, R):
     Reachability solver
     :param arena:
     :param R: reachability set
-    :return: two tuples -> winning region and strategy for both players
+    :return: Winning region and strategy for player 0 and player 1 respectively
     """
     out = defaultdict(int)
     # Compute the number of outgoing edges for each node in the arena
@@ -40,7 +40,7 @@ def reachability_solver(arena, R):
     while queue:
         node = queue.popleft()  # Pop node from left side (FIFO)
         for predecessor in arena.get_predecessors(node):
-            if regions[predecessor] == -1:  # If -1, doesn't belong to a winning region yet
+            if regions[predecessor] == -1:  # If -1, it doesn't belong to a winning region yet
                 if arena.get_player(predecessor) == 0:
                     queue.append(predecessor)
                     regions[predecessor] = 0
@@ -56,6 +56,7 @@ def reachability_solver(arena, R):
                         region_0.append(predecessor)
                         strategy_1[predecessor] = node  # can be assigned arbitrarily
 
+    # The remaining nodes are winning for player 1
     for node in arena.get_nodes():
         if regions[node] != 0:
             regions[node] = 1

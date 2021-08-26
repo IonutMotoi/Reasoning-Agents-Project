@@ -6,7 +6,7 @@ def safety_solver(arena, safety_set):
     Solver for safety games
     :param arena: The arena of the game
     :param safety_set: Safety set
-    :return: two tuples -> winning region and strategy for player 0 and player 1
+    :return: Winning region and strategy for player 0 and player 1 respectively
     """
     nodes = arena.get_nodes()
 

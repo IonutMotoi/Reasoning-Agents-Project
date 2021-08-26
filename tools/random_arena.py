@@ -3,6 +3,21 @@ from random import randint
 
 
 def generate_random_arena(num_nodes, max_priority, max_successors):
+    """
+    Generates a random arena and exports it to a txt file
+    The txt file will have the following format:
+        ...
+        nodeN player importance successor,successor2,...
+        nodeN+1 player importance successor,successor2,...
+        ...
+    :param num_nodes: The number of nodes that the arena will have
+    :param max_priority: The maximum priority that a node can have
+    :param max_successors: The maximum number of outgoing edges for each node (min: 1)
+    :return:
+    """
+    assert max_priority >= 0, "max_priority cannot be a negative number"
+    assert max_successors > 0, "max_successors must be greater or equal to 1 (valid arena)"
+
     if not os.path.exists("../assets/random_arenas"):
         os.makedirs("../assets/random_arenas")
     file = open("../assets/random_arenas/ran_arena_" + str(num_nodes)
@@ -35,7 +50,7 @@ def generate_random_arena(num_nodes, max_priority, max_successors):
 
 generate_random_arena(10, 10, 10)
 generate_random_arena(100, 10, 100)
-generate_random_arena(1000, 1000, 50)
 generate_random_arena(1000, 100, 100)
+generate_random_arena(1000, 1000, 50)
 generate_random_arena(10000, 1000, 10)
 generate_random_arena(10000, 10000, 1000)
