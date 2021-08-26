@@ -47,7 +47,6 @@ def attractor_with_strategy(arena, s, i=0):
     # While the target set is not empty
     while queue:
         node = queue.pop()
-        print(arena.get_predecessors(node))
         for predecessor in arena.get_predecessors(node):
             if predecessor not in attr:
                 if arena.get_player(predecessor) == i:
