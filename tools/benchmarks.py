@@ -1,7 +1,6 @@
 import argparse
-import os
 import time
-from .random_arena import generate_random_arena
+from matplotlib import pyplot as plt
 from arena.load_arena import load_arena, load_arena_parity
 from solvers.reachability import reachability_solver
 from solvers.safety import safety_solver
@@ -19,19 +18,15 @@ my_parser.add_argument('--target', type=int, nargs='+', default=None, help="Targ
 # Execute the parse_args() method
 args = my_parser.parse_args()
 
-# Extract the name of the arena from the path
-#generate_random_arena(10, 10, 2)
-#print("arena0")
-#generate_random_arena(100, 100, 20)
-#print("arena1")
-#generate_random_arena(1000, 1000, 200)
-#print("arena2")
-#generate_random_arena(10000, 10000, 2000)
-#print("arena3")
+nodes = [10, 100, 1000, 10000]
+plt.grid(True)
+plt.xlabel("Number of nodes")
+plt.xscale("log")
+plt.ylabel("Time (s)")
+plt.yscale("log")
 
 # Reachability solver
 if args.game == "reachability":
-
     arena0 = load_arena("assets/random_arenas/ran_arena_10_10_2.txt")
     arena1 = load_arena("assets/random_arenas/ran_arena_100_100_20.txt")
     arena2 = load_arena("assets/random_arenas/ran_arena_1000_1000_200.txt")
@@ -61,6 +56,9 @@ if args.game == "reachability":
     print("Arena3 done")
 
     print("Reachability times", times)
+
+    plt.plot(nodes, times)
+    plt.show()
 
 # Safety Solver
 elif args.game == "safety":
@@ -161,7 +159,6 @@ elif args.game == "cobuchi":
 
     print("Co-buchi times", times)
 
-
 # Parity solver
 elif args.game == "parity":
     arena0 = load_arena_parity("assets/random_arenas/ran_arena_10_10_2.txt")
@@ -176,15 +173,21 @@ elif args.game == "parity":
     times.append(time.time() - start)
     print("Arena0 done")
 
+    print("Parity times", times)
+
     start = time.time()
     win0, win1, strat0, strat1 = parity_solver_strategy(arena1)
     times.append(time.time() - start)
     print("Arena1 done")
 
+    print("Parity times", times)
+
     start = time.time()
     win0, win1, strat0, strat1 = parity_solver_strategy(arena2)
     times.append(time.time() - start)
     print("Arena2 done")
+
+    print("Parity times", times)
 
     start = time.time()
     win0, win1, strat0, strat1 = parity_solver_strategy(arena3)
@@ -192,3 +195,6 @@ elif args.game == "parity":
     print("Arena3 done")
 
     print("Parity times", times)
+
+    plt.plot(nodes, times)
+    plt.show()

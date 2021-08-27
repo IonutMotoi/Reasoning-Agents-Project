@@ -7,7 +7,7 @@ from solvers.reachability import reachability_solver
 from solvers.safety import safety_solver
 from solvers.buchi import buchi_solver
 from solvers.cobuchi import cobuchi_solver
-from solvers.parity import parity_solver, parity_solver_strategy
+from solvers.parity import parity_solver_strategy
 
 # Create the parser
 my_parser = argparse.ArgumentParser(description='Solver for different types of games on graphs')
