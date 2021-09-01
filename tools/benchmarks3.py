@@ -19,6 +19,6 @@ for p in [2, 3, 5]:
             sum_times = sum_times + (time.time() - start)
         avg_time = sum_times / 10.0
         print("Average time (arena_" + str(n) + "_" + str(p) + "_" + str(n) + "): " + str(avg_time))
-        file.write("Average time (arena_" + str(n) + "_" + str(p) + "_" + str(n) + "): " + str(avg_time))
+        file.write("Average time (arena_" + str(n) + "_" + str(p) + "_" + str(n) + "): " + str(avg_time) + "\n")
 
 file.close()
