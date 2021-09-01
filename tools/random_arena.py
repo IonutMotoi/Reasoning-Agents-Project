@@ -49,9 +49,9 @@ def generate_random_arena(num_nodes, max_priority, max_successors, folder, pedix
     file.close()
 
 
-for p in [2, 3, 5]:
-    for n in range(200, 2000, 200):
-        folder_name = "priority" + str(p) + "/nodes" + str(n)
-        for i in range(10):
-            generate_random_arena(n, p, n, folder_name, i)
-    print("Priority ", p, " DONE\n")
+# for p in [2, 3, 5]:
+#     for n in range(200, 2200, 200):
+#         folder_name = "priority" + str(p) + "/nodes" + str(n)
+#         for i in range(10):
+#             generate_random_arena(n, p, n, folder_name, i)
+#     print("Priority ", p, " DONE\n")
