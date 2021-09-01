@@ -2,7 +2,7 @@ import os
 from random import randint
 
 
-def generate_random_arena(num_nodes, max_priority, max_successors):
+def generate_random_arena(num_nodes, max_priority, max_successors, folder, pedix):
     """
     Generates a random arena and exports it to a txt file
     The txt file will have the following format:
@@ -18,10 +18,11 @@ def generate_random_arena(num_nodes, max_priority, max_successors):
     assert max_priority >= 0, "max_priority cannot be a negative number"
     assert max_successors > 0, "max_successors must be greater or equal to 1 (valid arena)"
 
-    if not os.path.exists("../assets/random_arenas"):
-        os.makedirs("../assets/random_arenas")
-    file = open("../assets/random_arenas/ran_arena_" + str(num_nodes)
-                + "_" + str(max_priority) + "_" + str(max_successors) + ".txt", "w")
+    base_path = os.path.join("../assets/random_arenas", folder)
+    if not os.path.exists(base_path):
+        os.makedirs(base_path)
+    file = open(os.path.join(base_path, "arena_") + str(num_nodes)
+                + "_" + str(max_priority) + "_" + str(max_successors) + "_" + str(pedix) + ".txt", "w")
 
     for node in range(num_nodes):
         # Random player
@@ -48,11 +49,9 @@ def generate_random_arena(num_nodes, max_priority, max_successors):
     file.close()
 
 
-# generate_random_arena(10, 10, 10)
-# generate_random_arena(100, 100, 10)
-# generate_random_arena(1000, 1000, 10)
-# generate_random_arena(10000, 10000, 10)
-# generate_random_arena(100000, 100000, 10)
-# generate_random_arena(1000000, 1000000, 10)
-# generate_random_arena(10000000, 10000000, 10)
-# generate_random_arena(100000000, 100000000, 10)
+for p in [2, 3, 5]:
+    for n in range(200, 2000, 200):
+        folder_name = "priority" + str(p) + "/nodes" + str(n)
+        for i in range(10):
+            generate_random_arena(n, p, n, folder_name, i)
+    print("Priority ", p, " DONE\n")
