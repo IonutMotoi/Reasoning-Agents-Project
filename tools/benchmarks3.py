@@ -1,12 +1,13 @@
 import time
-from matplotlib import pyplot as plt
 from arena.load_arena import load_arena_parity
 from solvers.parity import parity_solver_strategy
 
-file = open("output/experiment1.txt", "w")
+# file = open("output/experiment1.txt", "w")
+file = open("output/experiment2.txt", "w")
 
 # Parity solver
-for p in [2, 3, 5]:
+# for p in [2, 3, 5]:
+for p in [10, 50, 100]:
     for n in range(200, 2200, 200):
         folder_name = "priority" + str(p) + "/nodes" + str(n)
         sum_times = 0
