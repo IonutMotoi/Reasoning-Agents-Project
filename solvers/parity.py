@@ -48,7 +48,7 @@ def parity_solver(arena):
             win_1.extend([x for x, v in arena.nodes.items()])
     else:
 
-        attractor_b = attractor(arena, win_opponent, opponent)  # REMEMBER TO INSERT ARENA, NOT SUB ARENA IF NOT WORKING
+        attractor_b = attractor(arena, win_opponent, opponent)
 
         attractor_b_prime = [x for x in arena.nodes if x not in attractor_b]
 
